@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Bad monsters/Scripts/Camera/CameraControl.cs">
     <Files>
-      <File FileName="Assets/Bad monsters/Scripts/Camera/CameraControl.cs" Line="33" Column="65" />
+      <File FileName="Assets/Bad monsters/Scripts/Camera/CameraControl.cs" Line="36" Column="41" />
       <File FileName="Assets/Bad monsters/Scripts/Conrols/playerContol.cs" Line="23" Column="18" />
       <File FileName="../../../2nd test platformer/Assets/Project_Time/Scripts/mainHeroController.cs" Line="37" Column="14" />
       <File FileName="../../../2nd test platformer/Assets/Project_Time/Scripts/enemyOneConroller.cs" Line="37" Column="16" />
