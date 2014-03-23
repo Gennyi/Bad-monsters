@@ -4,7 +4,9 @@
 TagManager:
   tags:
   - Door
-  - 
+  - Backgroung
+  - Enemy
+  - PointsOfInterests
   - 
   - 
   - 
@@ -57,6 +59,10 @@ TagManager:
   - name: Background
     userID: 2
     uniqueID: 1535931219
+    locked: 0
+  - name: Objects
+    userID: 6
+    uniqueID: 701501927
     locked: 0
   - name: Character
     userID: 4

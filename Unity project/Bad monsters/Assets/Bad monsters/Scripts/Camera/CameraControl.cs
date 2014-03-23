@@ -3,16 +3,16 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour {
 	const int size = 10;
-
+	
 	Vector3[,] points = new Vector3[size, size];
 	const float widhtScreen = 12.8f;
-
+	
 	public float doorWidht = 5f;
-
+	
 	private playerContol playerCtrl;
 	private Vector2 currentPos = new Vector2(0,0);
 	private Vector3 newPlayerPos;
-
+	
 	// Use this for initialization
 	void Start () {
 		playerCtrl = GameObject.Find("Player").GetComponent<playerContol>();
@@ -21,18 +21,18 @@ public class CameraControl : MonoBehaviour {
 				points[i, j].z = -10f;
 			}
 		}
-		points[0,0].x = 4.8f;
+		points[0,0].x = 17.8f;
 		points[0,0].y = 4.3f;
-		points[1,0].x = 14f;
+		points[1,0].x = 17f;
 		points[1,0].y = 4.3f;
 		points[2,0].x = 24f;
 		points[2,0].y = 4.3f;
-
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 		float dist = Vector3.Distance(points[(int)currentPos.x, (int)currentPos.y], transform.position);
 		if (dist < 0.1f) {
 			if (playerCtrl.isInTransZone == 1){
@@ -51,7 +51,7 @@ public class CameraControl : MonoBehaviour {
 				playerCtrl.isActive = true;
 			}
 		} else {
-		//всегда передвигаем камеру в нужную позицию
+			//всегда передвигаем камеру в нужную позицию
 			playerCtrl.isActive = false;
 			playerCtrl.transform.position = Vector3.Lerp(playerCtrl.transform.position, newPlayerPos, Time.deltaTime);
 			transform.position = Vector3.Lerp(transform.position, points[(int)currentPos.x, (int)currentPos.y], Time.deltaTime);
