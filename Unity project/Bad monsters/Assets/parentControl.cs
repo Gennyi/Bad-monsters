@@ -10,21 +10,25 @@ public class parentControl : MonoBehaviour {
 	public Transform[] pointsOfInterests;
 	public float speed = 5f;
 	public float lengthRoom = 7f;
-	public float timeOfInteracting = 5f;
+	public float timeOfInteracting = 9f;
 
+	private float halfOfParentBody = 1f;
 	private playerContol playerCtrl;		// Reference to the PlayerControl script.
 	private Transform pointToMove;
-	private float leftPoint;
-	private float rightPoint;
+	public float leftPoint;
+	public float rightPoint;
 	private states currentState = states.moving;
-	public float time = 0f;
-	public float timeOfInteractingReal = 0f;
+	private float time = 0f;
+	private float timeOfInteractingReal = 0f;
+
+	public float distToLeft;
+	public float distToRight;
 	
 	void Awake()
 	{
 		playerCtrl = GameObject.Find("Player").GetComponent<playerContol>();
-		leftPoint = transform.position.x;
-		rightPoint = leftPoint + lengthRoom;
+		leftPoint = transform.position.x - halfOfParentBody;
+		rightPoint = leftPoint + lengthRoom + 2*halfOfParentBody;
 
 		getPoint();
 	}
@@ -41,20 +45,46 @@ public class parentControl : MonoBehaviour {
 	void Update () {
 		if(currentState == states.interacting){
 			time += Time.deltaTime;
+			//Если простояли достаточное время на точке
 			if (time > timeOfInteracting){
 				getPoint();
 				currentState = states.moving;
 			}
-		}
-
-		if ( currentState == states.moving){
+		} else if ( currentState == states.moving) {
 			Vector3 newPos = new Vector3(pointToMove.position.x, transform.position.y, transform.position.z);
 			transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime * speed);
+
+			//Вычисляем расстояние
+			float distance = transform.position.x - playerCtrl.transform.position.x;
+			distToLeft = Mathf.Abs(transform.position.x - leftPoint);
+			distToRight = Mathf.Abs(transform.position.x - rightPoint);
+			//Определяем, нашли ли монстрика
+			if(facingRight && distance < 0 && Mathf.Abs(distance) < distToRight){
+				currentState = states.found;
+				Vector3 newScale = new Vector3(transform.localScale.x * 2f, transform.localScale.y * 2f, transform.localScale.z);
+				transform.localScale = newScale;
+			}
+			if(!facingRight && distance > 0 && Mathf.Abs(distance) < distToLeft){
+				currentState = states.found;
+				Vector3 newScale = new Vector3(transform.localScale.x * 2f, transform.localScale.y * 2f, transform.localScale.z);
+				transform.localScale = newScale;
+			}
+
+			//поворачиваем родителя
+			float direction = newPos.x - transform.position.x;
+			if(direction > 0 && !facingRight) {
+				Flip();
+			} else if(direction < 0 && facingRight) {
+				Flip();
+			}
+			//Если дошли до точки интереса
 			if(transform.position == newPos){
 				currentState = states.interacting;
 				timeOfInteractingReal = Random.Range(timeOfInteracting - 2, timeOfInteracting + 2);
 				time = 0f;
 			}
+		} else if ( currentState == states.found) {
+
 		}
 
 

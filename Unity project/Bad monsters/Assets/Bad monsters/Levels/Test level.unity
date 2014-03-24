@@ -627,9 +627,9 @@ GameObject:
   - 4: {fileID: 503439390}
   - 212: {fileID: 503439389}
   - 61: {fileID: 503439388}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: curtains
-  m_TagString: Untagged
+  m_TagString: Curtains
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -740,10 +740,12 @@ MonoBehaviour:
   - {fileID: 1612751100}
   - {fileID: 1809218348}
   speed: 2
-  lengthRoom: 7
+  lengthRoom: 9.10000038
   timeOfInteracting: 5
-  time: 0
-  timeOfInteractingReal: 0
+  leftPoint: 0
+  rightPoint: 0
+  distToLeft: 0
+  distToRight: 0
 --- !u!58 &653029177
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -785,7 +787,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 653029175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.8524628, y: 2.23685598, z: 0}
+  m_LocalPosition: {x: 12.6883898, y: 2.14407396, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1536,7 +1538,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1922575050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.218081, y: 3.47228527, z: 0}
+  m_LocalPosition: {x: 5.44819546, y: 2.78217983, z: 0}
   m_LocalScale: {x: .300000012, y: .300000012, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1578,9 +1580,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 1
-  isActive: 1
   speed: 5
   isInTransZone: 0
+  currentState: 0
 --- !u!1 &2038820374
 GameObject:
   m_ObjectHideFlags: 0
