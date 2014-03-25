@@ -8,14 +8,14 @@ TagManager:
   - Enemy
   - PointsOfInterests
   - Curtains
+  - "\u0421upboard"
+  - Bad
+  - Toilet
+  - Bath
+  - Decor
+  - ElShield
+  - Light
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - Bullet
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

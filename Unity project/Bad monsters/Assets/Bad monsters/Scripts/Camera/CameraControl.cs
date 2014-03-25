@@ -8,9 +8,10 @@ public class CameraControl : MonoBehaviour {
 	const float widhtScreen = 12.8f;
 	
 	public float doorWidht = 5f;
+	public float speed = 2f;
 	
 	private playerContol playerCtrl;
-	private Vector2 currentPos = new Vector2(0,0);
+	private Vector2 currentPos = new Vector2(5,0);
 	private Vector3 newPlayerPos;
 	
 	// Use this for initialization
@@ -21,12 +22,16 @@ public class CameraControl : MonoBehaviour {
 				points[i, j].z = -10f;
 			}
 		}
-		points[0,0].x = 4.8f;
-		points[0,0].y = 4.3f;
-		points[1,0].x = 17f;
-		points[1,0].y = 4.3f;
-		points[2,0].x = 24f;
-		points[2,0].y = 4.3f;
+		points[3,0].x = -9.2f;
+		points[3,0].y = 4.3f;
+		points[4,0].x = -3.2f;
+		points[4,0].y = 4.3f;
+		points[5,0].x = 4.8f;
+		points[5,0].y = 4.3f;
+		points[6,0].x = 17f;
+		points[6,0].y = 4.3f;
+		points[7,0].x = 24f;
+		points[7,0].y = 4.3f;
 		
 	}
 	
@@ -46,16 +51,18 @@ public class CameraControl : MonoBehaviour {
 						currentPos = new Vector2(currentPos.x - 1, currentPos.y);
 						newPlayerPos = new Vector3(playerCtrl.transform.position.x - doorWidht, playerCtrl.transform.position.y, playerCtrl.transform.position.z);
 					}
+				} else if (Input.GetKeyDown(KeyCode.Q)) {
+					transform.position = Vector3.Lerp(transform.position, points[(int)currentPos.x + 1, (int)currentPos.y], Time.deltaTime * speed);
 				}
 			}
 			if(playerCtrl.currentState == playerContol.states.enteringRoom) {
 				playerCtrl.currentState = playerContol.states.normal;
 			}
-		} else { //если камера перемещается
+		} else if (dist > 0.1f && !Input.GetKeyDown(KeyCode.Q)) { //если камера перемещается
 			//всегда передвигаем камеру в нужную позицию
 			playerCtrl.currentState = playerContol.states.enteringRoom;
-			playerCtrl.transform.position = Vector3.Lerp(playerCtrl.transform.position, newPlayerPos, Time.deltaTime);
-			transform.position = Vector3.Lerp(transform.position, points[(int)currentPos.x, (int)currentPos.y], Time.deltaTime);
+			playerCtrl.transform.position = Vector3.MoveTowards(playerCtrl.transform.position, newPlayerPos, Time.deltaTime * speed);
+			transform.position = Vector3.Lerp(transform.position, points[(int)currentPos.x, (int)currentPos.y], Time.deltaTime * speed);
 		}
 	}
 }

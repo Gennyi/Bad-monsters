@@ -6,15 +6,16 @@ public class playerContol : MonoBehaviour {
 	[HideInInspector]
 	public bool facingRight = true;
 
-	public float speed = 5f;
 	//0 - не у двери, 1 - у двери, 2 - идем вниз, 3 - наверх
 	public int isInTransZone = 0;
+	public float speed = 5f;
 	
 	[HideInInspector]
 	//0 - свободное перемещение, 1 - только влево, 2 - только вправо
-	private int canGoToDirection = 0;
+	public int canGoToDirection = 0;
 
 	public enum states {normal, enteringRoom, hiding};
+	[HideInInspector]
 	public states currentState = states.normal;
 	
 	// Use this for initialization
@@ -82,6 +83,8 @@ public class playerContol : MonoBehaviour {
 				Vector3 newScale = new Vector3(transform.localScale.x * 0.5f, transform.localScale.y * 0.5f, transform.localScale.z);
 				transform.localScale = newScale;
 			}
+		} else if (other.gameObject.tag == "Light") {
+			Time.timeScale = 0;
 		}
 	}
 	
