@@ -59,15 +59,11 @@ public class parentControl : MonoBehaviour {
 			distToLeft = Mathf.Abs(transform.position.x - leftPoint);
 			distToRight = Mathf.Abs(transform.position.x - rightPoint);
 			//Определяем, нашли ли монстрика
-			if(facingRight && distance < 0 && Mathf.Abs(distance) < distToRight){
+			if(facingRight && distance < 0 && Mathf.Abs(distance) < distToRight && playerCtrl.currentState != playerContol.states.hiding){
 				currentState = states.found;
-				Vector3 newScale = new Vector3(transform.localScale.x * 2f, transform.localScale.y * 2f, transform.localScale.z);
-				transform.localScale = newScale;
 			}
-			if(!facingRight && distance > 0 && Mathf.Abs(distance) < distToLeft){
+			if(!facingRight && distance > 0 && Mathf.Abs(distance) < distToLeft && playerCtrl.currentState != playerContol.states.hiding){
 				currentState = states.found;
-				Vector3 newScale = new Vector3(transform.localScale.x * 2f, transform.localScale.y * 2f, transform.localScale.z);
-				transform.localScale = newScale;
 			}
 
 			//поворачиваем родителя
@@ -84,6 +80,7 @@ public class parentControl : MonoBehaviour {
 				time = 0f;
 			}
 		} else if ( currentState == states.found) {
+			Time.timeScale=0;
 
 		}
 
@@ -188,6 +185,12 @@ public class parentControl : MonoBehaviour {
 //		if(Mathf.Abs(rigidbody2D.velocity.x) > maxSpeed)
 //			// Устанавливаем текущую скорость на максимальную
 //			rigidbody2D.velocity = new Vector2(Mathf.Sign(rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.tag == "Player" && playerCtrl.currentState != playerContol.states.hiding) {
+			currentState = states.found;
+		}
 	}
 	
 	void Flip ()
