@@ -5,20 +5,16 @@ public class playerContol : MonoBehaviour {
 	
 	[HideInInspector]
 	public bool facingRight = true;
-
 	//0 - не у двери, 1 - у двери, 2 - идем вниз, 3 - наверх
 	public int isInTransZone = 0;
 	public float speed = 5f;
-	
-	[HideInInspector]
 	//0 - свободное перемещение, 1 - только влево, 2 - только вправо
+	[HideInInspector]
 	public int canGoToDirection = 0;
-
 	public enum states {normal, enteringRoom, hiding};
-//	[HideInInspector]
+	[HideInInspector]
 	public states currentState = states.normal;
-	
-	// Use this for initialization
+
 	void Start () {
 		
 	}
@@ -48,12 +44,14 @@ public class playerContol : MonoBehaviour {
 				Flip();
 			}
 		} else if(currentState == states.hiding) {
+			//Если мы сейчас спрятаны
 			if (Input.GetKeyDown(KeyCode.Q)) {
 				currentState = states.normal;
 				Vector3 newScale = new Vector3(transform.localScale.x * 2f, transform.localScale.y * 2f, transform.localScale.z);
 				transform.localScale = newScale;
 			}
 		} else if (currentState == states.enteringRoom) {
+			//Если мы сейчас перемещаемся между комнатами
 			CameraControl camera = GameObject.Find("MainCamera").GetComponent<CameraControl>();
 			transform.position = Vector3.MoveTowards(transform.position, camera.newPlayerPos, Time.deltaTime * speed);
 		}
