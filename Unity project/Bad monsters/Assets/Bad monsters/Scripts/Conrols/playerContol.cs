@@ -15,7 +15,7 @@ public class playerContol : MonoBehaviour {
 	public int canGoToDirection = 0;
 
 	public enum states {normal, enteringRoom, hiding};
-	[HideInInspector]
+//	[HideInInspector]
 	public states currentState = states.normal;
 	
 	// Use this for initialization
@@ -53,6 +53,9 @@ public class playerContol : MonoBehaviour {
 				Vector3 newScale = new Vector3(transform.localScale.x * 2f, transform.localScale.y * 2f, transform.localScale.z);
 				transform.localScale = newScale;
 			}
+		} else if (currentState == states.enteringRoom) {
+			CameraControl camera = GameObject.Find("MainCamera").GetComponent<CameraControl>();
+			transform.position = Vector3.MoveTowards(transform.position, camera.newPlayerPos, Time.deltaTime * speed);
 		}
 	}
 	

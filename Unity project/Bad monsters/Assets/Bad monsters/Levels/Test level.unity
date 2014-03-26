@@ -261,7 +261,7 @@ GameObject:
   - 81: {fileID: 120544475}
   - 114: {fileID: 120544480}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -341,6 +341,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorWidht: 3.5
   speed: 3
+  currentPos: {x: 5, y: 0}
+  postPos: {x: 0, y: 0}
+  newPlayerPos: {x: 0, y: 0, z: 0}
+  dist: 0
 --- !u!1 &132444803
 GameObject:
   m_ObjectHideFlags: 0
