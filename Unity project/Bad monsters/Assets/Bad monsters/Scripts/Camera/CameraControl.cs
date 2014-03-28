@@ -12,11 +12,9 @@ public class CameraControl : MonoBehaviour {
 	
 	private playerContol playerCtrl;
 	// Наша текущая позиция камеры (среди комнат)
-	private Vector2 currentPos = new Vector2(5,0);
+	public Vector2 currentPos = new Vector2(5,5);
 	// Наша предыдущая позиция камеры
-	private Vector2 prePos;
-	[HideInInspector]
-	public Vector3 newPlayerPos;
+	public Vector2 prePos;
 
 	// Use this for initialization
 	void Start () {
@@ -28,16 +26,16 @@ public class CameraControl : MonoBehaviour {
 				points[i, j].z = -10f;
 			}
 		}
-		points[3,0].x = -9.2f;
-		points[3,0].y = 4.3f;
-		points[4,0].x = -3.2f;
-		points[4,0].y = 4.3f;
-		points[5,0].x = 4.8f;
-		points[5,0].y = 4.3f;
-		points[6,0].x = 17f;
-		points[6,0].y = 4.3f;
-		points[7,0].x = 24f;
-		points[7,0].y = 4.3f;
+		points[3,5].x = -9.2f;
+		points[3,5].y = 4.3f;
+		points[4,5].x = -3.2f;
+		points[4,5].y = 4.3f;
+		points[5,5].x = 4.8f;
+		points[5,5].y = 4.3f;
+		points[6,5].x = 17f;
+		points[6,5].y = 4.3f;
+		points[6,4].x = 15.2f;
+		points[6,4].y = -3f;
 		
 	}
 	
@@ -49,10 +47,9 @@ public class CameraControl : MonoBehaviour {
 		if (Input.GetKeyUp(KeyCode.Q) || playerCtrl.isInTransZone == 0){
 			currentPos = prePos;
 		}
-
+		// Если стоим у двери, считываем нажатие на клавишу КУ
+		float h = Input.GetAxis("LookAtDoor");
 		if (playerCtrl.isInTransZone == 1){
-			// Если стоим у двери, считываем нажатие на клавишу КУ
-			float h = Input.GetAxis("LookAtDoor");
 			// Запоминаем предыдущую позицию, если КУ не нажата
 			if (h == 0) {
 				prePos = currentPos;
@@ -67,25 +64,29 @@ public class CameraControl : MonoBehaviour {
 			}
 		}
 
-		//Если камера находится в покое
-		if (dist < 0.1f) {
-			if(playerCtrl.currentState == playerContol.states.enteringRoom) {
-				playerCtrl.currentState = playerContol.states.normal;
-			}
-			if (playerCtrl.isInTransZone == 1){
-				if (Input.GetKeyDown(KeyCode.E)) {
-					playerCtrl.currentState = playerContol.states.enteringRoom;
-					if (playerCtrl.canGoToDirection == 1) { //входим в правую дверь
-						currentPos = new Vector2(currentPos.x + 1, currentPos.y);
-						newPlayerPos = new Vector3(playerCtrl.transform.position.x + doorWidht, playerCtrl.transform.position.y, playerCtrl.transform.position.z);
-					} else if (playerCtrl.canGoToDirection == 2) { //входим в левую дверь
-						currentPos = new Vector2(currentPos.x - 1, currentPos.y);
-						newPlayerPos = new Vector3(playerCtrl.transform.position.x - doorWidht, playerCtrl.transform.position.y, playerCtrl.transform.position.z);
-					}
+		//Возвращаем персонажу нужное состояние
+		if(playerCtrl.currentState == playerContol.states.enteringRoom && Vector3.Distance(playerCtrl.transform.position, playerCtrl.pointMove) == 0) {
+			playerCtrl.currentState = playerContol.states.normal;
+		}
+		//Отслеживаем переход в новую комнату
+		if (playerCtrl.isInTransZone == 1 && playerCtrl.currentState == playerContol.states.normal){
+			if (Input.GetKeyDown(KeyCode.E)) {
+				if (h == 1) {
+					prePos = currentPos;
+				}
+				playerCtrl.currentState = playerContol.states.enteringRoom;
+				if (playerCtrl.canGoToDirection == 1) { //входим в правую дверь
+					currentPos = new Vector2( h == 1 ? currentPos.x : currentPos.x + 1, currentPos.y);
+					playerCtrl.pointMove = new Vector3(playerCtrl.transform.position.x + doorWidht, playerCtrl.transform.position.y, playerCtrl.transform.position.z);
+				} else if (playerCtrl.canGoToDirection == 2) { //входим в левую дверь
+					currentPos = new Vector2(h == 1 ? currentPos.x : currentPos.x - 1, currentPos.y);
+					playerCtrl.pointMove = new Vector3(playerCtrl.transform.position.x - doorWidht, playerCtrl.transform.position.y, playerCtrl.transform.position.z);
 				}
 			}
+		}
 
-		} else { //если камера перемещается
+		//если камере нужно перемещается
+		if (dist > 0.1f) { 
 			//всегда передвигаем камеру в нужную позицию
 			transform.position = Vector3.Lerp(transform.position, points[(int)currentPos.x, (int)currentPos.y], Time.deltaTime * speed);
 		}

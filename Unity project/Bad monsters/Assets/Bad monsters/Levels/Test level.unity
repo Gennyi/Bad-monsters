@@ -341,10 +341,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorWidht: 3.5
   speed: 3
-  currentPos: {x: 5, y: 0}
-  postPos: {x: 0, y: 0}
-  newPlayerPos: {x: 0, y: 0, z: 0}
-  dist: 0
+  currentPos: {x: 5, y: 5}
+  prePos: {x: 0, y: 0}
 --- !u!1 &132444803
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,8 +503,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 207238401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.37780857, y: -3.04670286, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 17.2142162, y: -2.95080566, z: 0}
+  m_LocalScale: {x: .999167621, y: .999167621, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &340651922
@@ -1044,7 +1042,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 645504492}
   m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381676, w: .875426054}
-  m_LocalPosition: {x: -8.19326019, y: 6.02765226, z: 0}
+  m_LocalPosition: {x: -14.5455418, y: 9.92765903, z: 11.0024729}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1516,9 +1514,10 @@ GameObject:
   - 4: {fileID: 1318947577}
   - 212: {fileID: 1318947576}
   - 61: {fileID: 1318947575}
+  - 114: {fileID: 1318947578}
   m_Layer: 11
-  m_Name: Bath
-  m_TagString: "\u0421upboard"
+  m_Name: Toilet
+  m_TagString: Toilet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1564,10 +1563,23 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1318947574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.41392422, y: 2.64990282, z: 0}
+  m_LocalPosition: {x: -7.44347, y: 2.64990282, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1318947578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1318947574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79434c0c20194df1a3ebe2d3e1bd4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toilet: {fileID: 2061755553}
+  room: {x: 3, y: 5}
 --- !u!1 &1364699951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,7 +2264,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1922575050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.73818016, y: 3.08894897, z: 0}
+  m_LocalPosition: {x: 4.42156172, y: 2.73359489, z: 0}
   m_LocalScale: {x: .300000012, y: .300000012, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2298,6 +2310,7 @@ MonoBehaviour:
   speed: 5
   canGoToDirection: 0
   currentState: 0
+  pointMove: {x: 0, y: 0, z: 0}
 --- !u!1 &2038820374
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,6 +2412,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocket: {fileID: 5000000, guid: 8fde8ec1b330d4bbfb4839f4b41cadc0, type: 2}
   speed: 25
+--- !u!1 &2061755553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2061755557}
+  - 212: {fileID: 2061755556}
+  - 61: {fileID: 2061755555}
+  - 114: {fileID: 2061755554}
+  m_Layer: 11
+  m_Name: Toilet
+  m_TagString: Toilet
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2061755554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2061755553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79434c0c20194df1a3ebe2d3e1bd4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toilet: {fileID: 1318947574}
+  room: {x: 6, y: 4}
+--- !u!61 &2061755555
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2061755553}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: .439999998, y: 2.42000008}
+  m_Center: {x: 0, y: .140000001}
+--- !u!212 &2061755556
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2061755553}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortingLayerID: 701501927
+  m_Sprite: {fileID: 21300000, guid: b360f612bbbf84421bca6587939f3ca4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &2061755557
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2061755553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.7188663, y: -4.65872145, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &2089367098
 GameObject:
   m_ObjectHideFlags: 0

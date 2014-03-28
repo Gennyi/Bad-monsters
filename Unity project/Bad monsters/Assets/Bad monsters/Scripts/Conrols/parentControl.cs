@@ -58,11 +58,12 @@ public class parentControl : MonoBehaviour {
 			float distance = transform.position.x - playerCtrl.transform.position.x;
 			distToLeft = Mathf.Abs(transform.position.x - leftPoint);
 			distToRight = Mathf.Abs(transform.position.x - rightPoint);
+			float distanceY = transform.position.y - playerCtrl.transform.position.y;
 			//Определяем, нашли ли монстрика
-			if(facingRight && distance < 0 && Mathf.Abs(distance) < distToRight && playerCtrl.currentState != playerContol.states.hiding){
+			if(facingRight && distance < 0 && distanceY < 3 && Mathf.Abs(distance) < distToRight && playerCtrl.currentState != playerContol.states.hiding){
 				currentState = states.found;
 			}
-			if(!facingRight && distance > 0 && Mathf.Abs(distance) < distToLeft && playerCtrl.currentState != playerContol.states.hiding){
+			if(!facingRight && distance > 0 && distanceY < 3 && Mathf.Abs(distance) < distToLeft && playerCtrl.currentState != playerContol.states.hiding){
 				currentState = states.found;
 			}
 

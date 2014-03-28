@@ -14,6 +14,8 @@ public class playerContol : MonoBehaviour {
 	public enum states {normal, enteringRoom, hiding};
 	[HideInInspector]
 	public states currentState = states.normal;
+	[HideInInspector]
+	public Vector3 pointMove;
 
 	void Start () {
 		
@@ -53,7 +55,7 @@ public class playerContol : MonoBehaviour {
 		} else if (currentState == states.enteringRoom) {
 			//Если мы сейчас перемещаемся между комнатами
 			CameraControl camera = GameObject.Find("MainCamera").GetComponent<CameraControl>();
-			transform.position = Vector3.MoveTowards(transform.position, camera.newPlayerPos, Time.deltaTime * speed);
+			transform.position = Vector3.MoveTowards(transform.position, pointMove, Time.deltaTime * speed);
 		}
 	}
 	
