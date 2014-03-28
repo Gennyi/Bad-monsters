@@ -10,7 +10,7 @@ public class CameraControl : MonoBehaviour {
 	public float doorWidht = 5f;
 	public float speed = 2f;
 	
-	private playerContol playerCtrl;
+	private playerControl playerCtrl;
 	// Наша текущая позиция камеры (среди комнат)
 	public Vector2 currentPos = new Vector2(5,5);
 	// Наша предыдущая позиция камеры
@@ -20,7 +20,7 @@ public class CameraControl : MonoBehaviour {
 	void Start () {
 		prePos = currentPos;
 
-		playerCtrl = GameObject.Find("Player").GetComponent<playerContol>();
+		playerCtrl = GameObject.Find("Player").GetComponent<playerControl>();
 		for (int i = 0; i < size; i++){
 			for(int j = 0; j < size; j++) {
 				points[i, j].z = -10f;
@@ -55,7 +55,7 @@ public class CameraControl : MonoBehaviour {
 				prePos = currentPos;
 			}
 			// При нажатии на КУ проверяем направление и задаем камере новую позицию
-			if (h > 0  && playerCtrl.currentState == playerContol.states.normal) {
+			if (h > 0  && playerCtrl.currentState == playerControl.states.normal) {
 				if (playerCtrl.canGoToDirection == 1) {
 					currentPos = new Vector2(prePos.x + 1, prePos.y);
 				} else if (playerCtrl.canGoToDirection == 2) { //входим в левую дверь
@@ -65,16 +65,16 @@ public class CameraControl : MonoBehaviour {
 		}
 
 		//Возвращаем персонажу нужное состояние
-		if(playerCtrl.currentState == playerContol.states.enteringRoom && Vector3.Distance(playerCtrl.transform.position, playerCtrl.pointMove) == 0) {
-			playerCtrl.currentState = playerContol.states.normal;
+		if(playerCtrl.currentState == playerControl.states.enteringRoom && Vector3.Distance(playerCtrl.transform.position, playerCtrl.pointMove) == 0) {
+			playerCtrl.currentState = playerControl.states.normal;
 		}
 		//Отслеживаем переход в новую комнату
-		if (playerCtrl.isInTransZone == 1 && playerCtrl.currentState == playerContol.states.normal){
+		if (playerCtrl.isInTransZone == 1 && playerCtrl.currentState == playerControl.states.normal){
 			if (Input.GetKeyDown(KeyCode.E)) {
 				if (h == 1) {
 					prePos = currentPos;
 				}
-				playerCtrl.currentState = playerContol.states.enteringRoom;
+				playerCtrl.currentState = playerControl.states.enteringRoom;
 				if (playerCtrl.canGoToDirection == 1) { //входим в правую дверь
 					currentPos = new Vector2( h == 1 ? currentPos.x : currentPos.x + 1, currentPos.y);
 					playerCtrl.pointMove = new Vector3(playerCtrl.transform.position.x + doorWidht, playerCtrl.transform.position.y, playerCtrl.transform.position.z);

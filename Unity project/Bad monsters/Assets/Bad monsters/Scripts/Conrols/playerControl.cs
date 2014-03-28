@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class playerContol : MonoBehaviour {
+public class playerControl : MonoBehaviour {
 	
 	[HideInInspector]
 	public bool facingRight = true;

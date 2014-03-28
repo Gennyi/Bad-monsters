@@ -13,7 +13,7 @@ public class parentControl : MonoBehaviour {
 	public float timeOfInteracting = 9f;
 
 	private float halfOfParentBody = 1f;
-	private playerContol playerCtrl;		// Reference to the PlayerControl script.
+	private playerControl playerCtrl;		// Reference to the PlayerControl script.
 	private Transform pointToMove;
 	public float leftPoint;
 	public float rightPoint;
@@ -26,7 +26,7 @@ public class parentControl : MonoBehaviour {
 	
 	void Awake()
 	{
-		playerCtrl = GameObject.Find("Player").GetComponent<playerContol>();
+		playerCtrl = GameObject.Find("Player").GetComponent<playerControl>();
 		leftPoint = transform.position.x - halfOfParentBody;
 		rightPoint = leftPoint + lengthRoom + 2*halfOfParentBody;
 
@@ -60,10 +60,10 @@ public class parentControl : MonoBehaviour {
 			distToRight = Mathf.Abs(transform.position.x - rightPoint);
 			float distanceY = transform.position.y - playerCtrl.transform.position.y;
 			//Определяем, нашли ли монстрика
-			if(facingRight && distance < 0 && distanceY < 3 && Mathf.Abs(distance) < distToRight && playerCtrl.currentState != playerContol.states.hiding){
+			if(facingRight && distance < 0 && distanceY < 3 && Mathf.Abs(distance) < distToRight && playerCtrl.currentState != playerControl.states.hiding){
 				currentState = states.found;
 			}
-			if(!facingRight && distance > 0 && distanceY < 3 && Mathf.Abs(distance) < distToLeft && playerCtrl.currentState != playerContol.states.hiding){
+			if(!facingRight && distance > 0 && distanceY < 3 && Mathf.Abs(distance) < distToLeft && playerCtrl.currentState != playerControl.states.hiding){
 				currentState = states.found;
 			}
 
@@ -87,7 +87,7 @@ public class parentControl : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag == "Player" && playerCtrl.currentState != playerContol.states.hiding) {
+		if (other.gameObject.tag == "Player" && playerCtrl.currentState != playerControl.states.hiding) {
 			currentState = states.found;
 		}
 	}
