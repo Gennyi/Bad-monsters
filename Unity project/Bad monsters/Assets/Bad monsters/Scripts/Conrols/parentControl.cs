@@ -27,6 +27,7 @@ public class parentControl : MonoBehaviour {
 	void Awake()
 	{
 		playerCtrl = GameObject.Find("Player").GetComponent<playerControl>();
+		timeOfInteractingReal = Random.Range(timeOfInteracting - 2, timeOfInteracting + 2);
 		leftPoint = transform.position.x - halfOfParentBody;
 		rightPoint = leftPoint + lengthRoom + 2*halfOfParentBody;
 
@@ -46,7 +47,7 @@ public class parentControl : MonoBehaviour {
 		if(currentState == states.interacting){
 			time += Time.deltaTime;
 			//Если простояли достаточное время на точке
-			if (time > timeOfInteracting){
+			if (time > timeOfInteractingReal){
 				getPoint();
 				currentState = states.moving;
 			}

@@ -16,6 +16,7 @@ public class playerControl : MonoBehaviour {
 	public states currentState = states.normal;
 	[HideInInspector]
 	public Vector3 pointMove;
+	public static int score = 0;
 
 	void Start () {
 		
@@ -61,6 +62,7 @@ public class playerControl : MonoBehaviour {
 	
 	void Flip ()
 	{
+		score++;
 		// Switch the way the player is labelled as facing.
 		facingRight = !facingRight;
 		
@@ -89,6 +91,12 @@ public class playerControl : MonoBehaviour {
 		} else if (other.gameObject.tag == "Light") {
 			Time.timeScale = 0;
 		}
+	}
+
+	void OnGUI () {
+		string str;
+		str = "Score: " + score;
+		GUI.Label (new Rect (10,10,150,100), str);
 	}
 	
 	void OnTriggerExit2D(Collider2D other) {

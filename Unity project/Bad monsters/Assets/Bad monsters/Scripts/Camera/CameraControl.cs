@@ -36,6 +36,8 @@ public class CameraControl : MonoBehaviour {
 		points[6,5].y = 4.3f;
 		points[6,4].x = 15.2f;
 		points[6,4].y = -3f;
+		points[5,4].x = 5f;
+		points[5,4].y = -3f;
 		
 	}
 	
