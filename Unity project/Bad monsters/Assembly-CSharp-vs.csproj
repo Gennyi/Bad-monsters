@@ -51,7 +51,8 @@
      <Compile Include="Assets\Bad monsters\Scripts\Conrols\parentControl.cs" />
      <Compile Include="Assets\Bad monsters\Scripts\Conrols\playerControl.cs" />
      <Compile Include="Assets\Bad monsters\Scripts\Objects\lightControl.cs" />
-     <Compile Include="Assets\Bad monsters\Scripts\Objects\toiletContol.cs" />
+     <Compile Include="Assets\Bad monsters\Scripts\Objects\noizeControl.cs" />
+     <Compile Include="Assets\Bad monsters\Scripts\Objects\toiletControl.cs" />
      <Compile Include="Assets\Scripts\BackgroundParallax.cs" />
      <Compile Include="Assets\Scripts\BackgroundPropSpawner.cs" />
      <Compile Include="Assets\Scripts\Bomb.cs" />

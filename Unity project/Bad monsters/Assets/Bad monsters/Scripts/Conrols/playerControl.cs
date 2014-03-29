@@ -62,7 +62,6 @@ public class playerControl : MonoBehaviour {
 	
 	void Flip ()
 	{
-		score++;
 		// Switch the way the player is labelled as facing.
 		facingRight = !facingRight;
 		
@@ -75,14 +74,14 @@ public class playerControl : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.gameObject.tag == "Door") {
 			isInTransZone = 1;
-			if (canGoToDirection == 0) {
-				if(facingRight){
-					canGoToDirection = 1;
-				} else {
-					canGoToDirection = 2;
-				}
+			//Проверяем находимся слева или справа
+			float dist = other.transform.position.x - transform.position.x;
+			if(dist > 0){
+				canGoToDirection = 1;
+			} else {
+				canGoToDirection = 2;
 			}
-		} else if (other.gameObject.tag == "Curtains") {
+		} else if (other.gameObject.tag == "Curtains" || other.gameObject.tag == "Bad") {
 			if (Input.GetKeyDown(KeyCode.E) && currentState == states.normal) {
 				currentState = states.hiding;
 				Vector3 newScale = new Vector3(transform.localScale.x * 0.5f, transform.localScale.y * 0.5f, transform.localScale.z);
@@ -91,11 +90,21 @@ public class playerControl : MonoBehaviour {
 		} else if (other.gameObject.tag == "Light") {
 			Time.timeScale = 0;
 		}
+		if (other.gameObject.tag == "Child") {
+			childControl ourChild = other.gameObject.GetComponent<childControl>();
+			if(currentState == states.hiding && Input.GetKeyDown(KeyCode.F) && 
+			   ourChild.currentState == childControl.states.scaring && ourChild.dispatchOnce){
+				score += (int)ourChild.scaryLevel;
+				ourChild.dispatchOnce = false;
+				ourChild.scaryLevel = 0f;
+			}
+		}
+
+		 
 	}
 
 	void OnGUI () {
-		string str;
-		str = "Score: " + score;
+		string str = "Score: " + score;
 		GUI.Label (new Rect (10,10,150,100), str);
 	}
 	

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class toiletContol : MonoBehaviour {
+public class toiletControl : MonoBehaviour {
 
 	public GameObject toilet;
 	public Vector2 room = new Vector2(0,0);
@@ -12,7 +12,7 @@ public class toiletContol : MonoBehaviour {
 				//Переключить свет
 				CameraControl camera = GameObject.Find("MainCamera").GetComponent<CameraControl>();
 				playerControl playerCtrl = GameObject.Find("Player").GetComponent<playerControl>();
-				toiletContol anotherToilet = toilet.GetComponent<toiletContol>();
+				toiletControl anotherToilet = toilet.GetComponent<toiletControl>();
 				camera.currentPos = anotherToilet.room;
 				camera.prePos = camera.currentPos;
 				playerCtrl.transform.position = anotherToilet.transform.position;
