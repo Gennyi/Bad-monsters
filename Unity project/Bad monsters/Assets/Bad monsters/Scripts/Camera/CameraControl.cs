@@ -15,6 +15,8 @@ public class CameraControl : MonoBehaviour {
 	public Vector2 currentPos = new Vector2(5,5);
 	// Наша предыдущая позиция камеры
 	public Vector2 prePos;
+	//Состояния камеры
+	public bool isFree = false;
 
 	// Use this for initialization
 	void Start () {
@@ -43,15 +45,22 @@ public class CameraControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float dist = Vector3.Distance(points[(int)currentPos.x, (int)currentPos.y], transform.position);
+		float dist;
+		if (isFree) {
+			dist = Vector3.Distance(playerCtrl.transform.position, transform.position);
+		} else {
+			dist = Vector3.Distance(points[(int)currentPos.x, (int)currentPos.y], transform.position);
+		}
 
+		float h = Input.GetAxis("LookAtDoor");
 		// Возвращаем камеры в предыдущую позицию, если мы отжали КУ или вышли из зоны двери
-		if (Input.GetKeyUp(KeyCode.Q) || playerCtrl.isInTransZone == 0){
+		if ((h == 0 || playerCtrl.isInTransZone == 0) && playerCtrl.currentState == playerControl.states.normal){
 			currentPos = prePos;
 		}
+//		GUIButton QButton = GameObject.Find("QBut").GetComponent<GUIButton>();
 		// Если стоим у двери, считываем нажатие на клавишу КУ
-		float h = Input.GetAxis("LookAtDoor");
 		if (playerCtrl.isInTransZone == 1){
+//			QButton.transform.localScale = new Vector3(2.3f, 2.3f, 1f);
 			// Запоминаем предыдущую позицию, если КУ не нажата
 			if (h == 0) {
 				prePos = currentPos;
@@ -64,7 +73,9 @@ public class CameraControl : MonoBehaviour {
 					currentPos = new Vector2(prePos.x - 1, prePos.y);
 				}
 			}
-		}
+		} //else {
+//			QButton.transform.localScale = new Vector3();
+//		}
 
 		//Возвращаем персонажу нужное состояние
 		if(playerCtrl.currentState == playerControl.states.enteringRoom && Vector3.Distance(playerCtrl.transform.position, playerCtrl.pointMove) == 0) {
@@ -72,7 +83,7 @@ public class CameraControl : MonoBehaviour {
 		}
 		//Отслеживаем переход в новую комнату
 		if (playerCtrl.isInTransZone == 1 && playerCtrl.currentState == playerControl.states.normal){
-			if (Input.GetKeyDown(KeyCode.E)) {
+			if (Input.GetButtonDown("goOut")) {
 				if (h == 1) {
 					prePos = currentPos;
 				}
@@ -90,7 +101,12 @@ public class CameraControl : MonoBehaviour {
 		//если камере нужно перемещается
 		if (dist > 0.1f) { 
 			//всегда передвигаем камеру в нужную позицию
-			transform.position = Vector3.Lerp(transform.position, points[(int)currentPos.x, (int)currentPos.y], Time.deltaTime * speed);
+			if (isFree) {
+				Vector3 playerPos = new Vector3(playerCtrl.transform.position.x, playerCtrl.transform.position.y, transform.position.z);
+				transform.position = Vector3.Lerp(transform.position, playerPos, Time.deltaTime * speed);
+			} else {
+				transform.position = Vector3.Lerp(transform.position, points[(int)currentPos.x, (int)currentPos.y], Time.deltaTime * speed);
+			}
 		}
 	}
 }

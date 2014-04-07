@@ -4,13 +4,25 @@ using System.Collections;
 public class lightControl : MonoBehaviour {
 
 	public GameObject light;
-	
+	private GUIButton EButton;
+
+	void Start() {
+		EButton = GameObject.Find("EBut").GetComponent<GUIButton>();
+	}
+
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
-			if (Input.GetKeyDown(KeyCode.F)) {
+			EButton.ShowBut();
+			if (Input.GetButtonDown("Action")) {
 				//Переключить свет
 				toggleLight();
 			}
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other){
+		if (other.gameObject.tag == "Player") {
+			EButton.HideBut();
 		}
 	}
 

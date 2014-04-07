@@ -18,8 +18,14 @@ public class playerControl : MonoBehaviour {
 	public Vector3 pointMove;
 	public static int score = 0;
 
+	private GUIButton EButton;
+	private GUIButton FButton;
+	private GUIButton QButton;
+
 	void Start () {
-		
+		EButton = GameObject.Find("EBut").GetComponent<GUIButton>();
+		FButton = GameObject.Find("FBut").GetComponent<GUIButton>();
+		QButton = GameObject.Find("QBut").GetComponent<GUIButton>();
 	}
 	
 	// Update is called once per frame
@@ -48,7 +54,8 @@ public class playerControl : MonoBehaviour {
 			}
 		} else if(currentState == states.hiding) {
 			//Если мы сейчас спрятаны
-			if (Input.GetKeyDown(KeyCode.Q)) {
+			if (Input.GetButtonDown("goOut")) {
+				FButton.HideBut();
 				currentState = states.normal;
 				Vector3 newScale = new Vector3(transform.localScale.x * 2f, transform.localScale.y * 2f, transform.localScale.z);
 				transform.localScale = newScale;
@@ -74,6 +81,8 @@ public class playerControl : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.gameObject.tag == "Door") {
 			isInTransZone = 1;
+			FButton.ShowBut();
+			QButton.ShowBut();
 			//Проверяем находимся слева или справа
 			float dist = other.transform.position.x - transform.position.x;
 			if(dist > 0){
@@ -82,7 +91,9 @@ public class playerControl : MonoBehaviour {
 				canGoToDirection = 2;
 			}
 		} else if (other.gameObject.tag == "Curtains" || other.gameObject.tag == "Bad") {
-			if (Input.GetKeyDown(KeyCode.E) && currentState == states.normal) {
+			EButton.ShowBut();
+			if (Input.GetAxis("Action") > 0 && currentState == states.normal) {
+				FButton.ShowBut();
 				currentState = states.hiding;
 				Vector3 newScale = new Vector3(transform.localScale.x * 0.5f, transform.localScale.y * 0.5f, transform.localScale.z);
 				transform.localScale = newScale;
@@ -92,15 +103,13 @@ public class playerControl : MonoBehaviour {
 		}
 		if (other.gameObject.tag == "Child") {
 			childControl ourChild = other.gameObject.GetComponent<childControl>();
-			if(currentState == states.hiding && Input.GetKeyDown(KeyCode.F) && 
+			if(currentState == states.hiding && Input.GetButtonDown("goOut") && 
 			   ourChild.currentState == childControl.states.scaring && ourChild.dispatchOnce){
 				score += (int)ourChild.scaryLevel;
 				ourChild.dispatchOnce = false;
 				ourChild.scaryLevel = 0f;
 			}
 		}
-
-		 
 	}
 
 	void OnGUI () {
@@ -110,8 +119,12 @@ public class playerControl : MonoBehaviour {
 	
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.gameObject.tag == "Door") {
+			FButton.HideBut();
+			QButton.HideBut();
 			isInTransZone = 0;
 			canGoToDirection = 0;
+		} else if (other.gameObject.tag == "Curtains" || other.gameObject.tag == "Bad") {
+			EButton.HideBut();
 		}
 	}
 }
