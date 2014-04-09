@@ -2,9 +2,10 @@
 using System.Collections;
 
 public class CameraControl : MonoBehaviour {
-	const int size = 10;
+	public const int size = 10;
+	const float infinity = 999999f;
 	
-	Vector3[,] points = new Vector3[size, size];
+	public Vector3[,] points;
 	const float widhtScreen = 12.8f;
 	
 	public float doorWidht = 5f;
@@ -21,11 +22,11 @@ public class CameraControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		prePos = currentPos;
-
+		points = new Vector3[size, size];
 		playerCtrl = GameObject.Find("Player").GetComponent<playerControl>();
 		for (int i = 0; i < size; i++){
 			for(int j = 0; j < size; j++) {
-				points[i, j].z = -10f;
+				points[i, j] = new Vector3(infinity, infinity, -10f);
 			}
 		}
 		points[3,5].x = -9.2f;

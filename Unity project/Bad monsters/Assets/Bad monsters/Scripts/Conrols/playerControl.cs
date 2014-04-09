@@ -62,7 +62,6 @@ public class playerControl : MonoBehaviour {
 			}
 		} else if (currentState == states.enteringRoom) {
 			//Если мы сейчас перемещаемся между комнатами
-			CameraControl camera = GameObject.Find("MainCamera").GetComponent<CameraControl>();
 			transform.position = Vector3.MoveTowards(transform.position, pointMove, Time.deltaTime * speed);
 		}
 	}

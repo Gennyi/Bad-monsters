@@ -74,6 +74,68 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!1 &42748190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 42748191}
+  - 212: {fileID: 42748193}
+  - 61: {fileID: 42748192}
+  m_Layer: 10
+  m_Name: BackDoor
+  m_TagString: Backdoor
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &42748191
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 42748190}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.20706844, y: -5.13141775, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1127097700}
+--- !u!61 &42748192
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 42748190}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: .589999974, y: 3.69000006}
+  m_Center: {x: 0, y: -.119999997}
+--- !u!212 &42748193
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 42748190}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: ac77f5fc3a53d4f4b82b14192d537632, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortingLayerID: 701501927
+  m_Sprite: {fileID: 21300000, guid: a316eb8ec40674df3b43f8a7c0fe6072, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &49599512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1416,7 @@ GameObject:
   - 212: {fileID: 653029178}
   - 58: {fileID: 653029177}
   - 114: {fileID: 653029176}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Parent
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1377,11 +1439,10 @@ MonoBehaviour:
   - {fileID: 76774396}
   - {fileID: 1612751100}
   - {fileID: 1809218348}
+  doorsMemory: []
   speed: 2
-  lengthRoom: 9.10000038
   timeOfInteracting: 5
-  leftPoint: 0
-  rightPoint: 0
+  currentRoom: {x: 0, y: 0}
 --- !u!58 &653029177
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1423,7 +1484,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 653029175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.6883898, y: 2.14407396, z: 0}
+  m_LocalPosition: {x: 17.1250648, y: 2.30856514, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1525,7 +1586,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 741078474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.93314219, y: 6.48478985, z: 0}
+  m_LocalPosition: {x: -3.90640211, y: 6.59401798, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 740331393}
@@ -1816,7 +1877,7 @@ GameObject:
   - 212: {fileID: 1042661548}
   - 61: {fileID: 1042661547}
   - 114: {fileID: 1042661550}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: child
   m_TagString: Child
   m_Icon: {fileID: 0}
@@ -2028,6 +2089,8 @@ Transform:
   m_LocalPosition: {x: 5.1745863, y: 1.79043353, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 2085362541}
+  - {fileID: 42748191}
   - {fileID: 763273444}
   - {fileID: 2089367101}
   - {fileID: 340651925}
@@ -3104,7 +3167,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1922575050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.42156172, y: 2.73359489, z: 0}
+  m_LocalPosition: {x: 8.83589268, y: 2.74712849, z: 0}
   m_LocalScale: {x: .300000012, y: .300000012, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3468,6 +3531,68 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 740331393}
+--- !u!1 &2085362538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2085362541}
+  - 212: {fileID: 2085362540}
+  - 61: {fileID: 2085362539}
+  m_Layer: 10
+  m_Name: BackDoor
+  m_TagString: Backdoor
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &2085362539
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2085362538}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: .589999974, y: 3.69000006}
+  m_Center: {x: 0, y: -.119999997}
+--- !u!212 &2085362540
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2085362538}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: ac77f5fc3a53d4f4b82b14192d537632, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortingLayerID: 701501927
+  m_Sprite: {fileID: 21300000, guid: a316eb8ec40674df3b43f8a7c0fe6072, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &2085362541
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2085362538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.72940159, y: 1.86853158, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1127097700}
 --- !u!1 &2089367098
 GameObject:
   m_ObjectHideFlags: 0
@@ -3526,7 +3651,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2089367098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.35282707, y: 1.80139077, z: 0}
+  m_LocalPosition: {x: -6.35282707, y: 1.7644664, z: 0}
   m_LocalScale: {x: 1.96000004, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1127097700}
