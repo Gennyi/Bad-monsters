@@ -18,7 +18,8 @@ public class PickObject : MonoBehaviour {
 			if (Input.GetButtonDown("Action") && dispatchOnce) {
 				dispatchOnce = false;
 				transform.localScale = new Vector3();
-				//playerControl player = GameObject.Find("Player").GetComponent<playerControl>;
+//				gameObject.GetComponent<playerControl>().inventory.Add(usingObjects);
+				playerControl.inventory.Add(myObject);
 
 			}
 		}

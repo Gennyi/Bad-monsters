@@ -19,6 +19,8 @@ public class playerControl : MonoBehaviour {
 	[HideInInspector]
 	public Vector3 pointMove;
 	public static int score = 0;
+	
+	public static ArrayList inventory = new ArrayList();
 
 	private GUIButton EButton;
 	private GUIButton FButton;
