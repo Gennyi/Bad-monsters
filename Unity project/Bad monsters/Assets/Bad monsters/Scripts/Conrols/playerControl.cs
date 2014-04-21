@@ -6,7 +6,9 @@ public class playerControl : MonoBehaviour {
 	[HideInInspector]
 	public bool facingRight = true;
 	//0 - не у двери, 1 - у двери, 2 - идем вниз, 3 - наверх
+	[HideInInspector]
 	public int isInTransZone = 0;
+
 	public float speed = 5f;
 	//0 - свободное перемещение, 1 - только влево, 2 - только вправо
 	[HideInInspector]
@@ -21,6 +23,8 @@ public class playerControl : MonoBehaviour {
 	private GUIButton EButton;
 	private GUIButton FButton;
 	private GUIButton QButton;
+
+
 
 	void Start () {
 		EButton = GameObject.Find("EBut").GetComponent<GUIButton>();
@@ -94,8 +98,8 @@ public class playerControl : MonoBehaviour {
 			if (Input.GetAxis("Action") > 0 && currentState == states.normal) {
 				FButton.ShowBut();
 				currentState = states.hiding;
-				Vector3 newScale = new Vector3(transform.localScale.x * 0.5f, transform.localScale.y * 0.5f, transform.localScale.z);
-				transform.localScale = newScale;
+				transform.position = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
+				transform.localScale = new Vector3(transform.localScale.x * 0.5f, transform.localScale.y * 0.5f, transform.localScale.z);
 			}
 		} else if (other.gameObject.tag == "Light") {
 			Time.timeScale = 0;
@@ -106,7 +110,10 @@ public class playerControl : MonoBehaviour {
 			   ourChild.currentState == childControl.states.scaring && ourChild.dispatchOnce){
 				score += (int)ourChild.scaryLevel;
 				ourChild.dispatchOnce = false;
-				ourChild.scaryLevel = 0f;
+				ourChild.scaryLevel = 0;
+				parentControl parent = GameObject.Find("Parent").GetComponent<parentControl>();
+				parent.currentState = parentControl.states.moving;
+				parent.findWay(ourChild.transform);
 			}
 		}
 	}

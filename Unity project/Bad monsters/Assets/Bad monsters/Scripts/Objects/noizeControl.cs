@@ -18,7 +18,7 @@ public class noizeControl : MonoBehaviour {
 			//Только если спим или боимся
 			if (Input.GetButtonDown("Action") && ourChild.currentState >= childControl.states.sleeping && dispatchOnce) {
 				dispatchOnce = false;
-				ourChild.scaryLevel += 20f;
+				ourChild.scaryLevel += 20;
 				ourChild.pointToMove = transform;
 				ourChild.currentState = childControl.states.moving;
 			}

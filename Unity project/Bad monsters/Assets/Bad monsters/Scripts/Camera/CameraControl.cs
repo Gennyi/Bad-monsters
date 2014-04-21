@@ -58,10 +58,8 @@ public class CameraControl : MonoBehaviour {
 		if ((h == 0 || playerCtrl.isInTransZone == 0) && playerCtrl.currentState == playerControl.states.normal){
 			currentPos = prePos;
 		}
-//		GUIButton QButton = GameObject.Find("QBut").GetComponent<GUIButton>();
 		// Если стоим у двери, считываем нажатие на клавишу КУ
 		if (playerCtrl.isInTransZone == 1){
-//			QButton.transform.localScale = new Vector3(2.3f, 2.3f, 1f);
 			// Запоминаем предыдущую позицию, если КУ не нажата
 			if (h == 0) {
 				prePos = currentPos;
@@ -74,9 +72,7 @@ public class CameraControl : MonoBehaviour {
 					currentPos = new Vector2(prePos.x - 1, prePos.y);
 				}
 			}
-		} //else {
-//			QButton.transform.localScale = new Vector3();
-//		}
+		}
 
 		//Возвращаем персонажу нужное состояние
 		if(playerCtrl.currentState == playerControl.states.enteringRoom && Vector3.Distance(playerCtrl.transform.position, playerCtrl.pointMove) == 0) {

@@ -18,7 +18,7 @@ public class GUIButton : MonoBehaviour {
 	}
 
 	public void ShowBut(){
-		transform.localScale = new Vector3(2.3f, 2.3f, 1.0f);
+		transform.localScale = new Vector3(1.5f, 1.5f, 1.0f);
 	}
 	public void HideBut(){
 		transform.localScale = new Vector3();

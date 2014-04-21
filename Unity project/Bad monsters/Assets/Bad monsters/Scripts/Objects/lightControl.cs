@@ -3,7 +3,7 @@ using System.Collections;
 
 public class lightControl : MonoBehaviour {
 
-	public GameObject light;
+	public GameObject lamp;
 	private GUIButton EButton;
 
 	void Start() {
@@ -28,9 +28,9 @@ public class lightControl : MonoBehaviour {
 
 	void toggleLight() {
 		Vector3 hide = new Vector3(0,0,0);
-		if (light.transform.localScale == hide) {
+		if (lamp.transform.localScale == hide) {
 			hide = new Vector3(1,1,1);
 		}
-		light.transform.localScale = hide;
+		lamp.transform.localScale = hide;
 	}
 }
