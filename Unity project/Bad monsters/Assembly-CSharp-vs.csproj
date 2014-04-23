@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Bad monsters\Scripts\Camera\CameraControl.cs" />
+     <Compile Include="Assets\Bad monsters\Scripts\Camera\CameraPositions.cs" />
      <Compile Include="Assets\Bad monsters\Scripts\Conrols\childControl.cs" />
      <Compile Include="Assets\Bad monsters\Scripts\Conrols\parentControl.cs" />
      <Compile Include="Assets\Bad monsters\Scripts\Conrols\playerControl.cs" />
