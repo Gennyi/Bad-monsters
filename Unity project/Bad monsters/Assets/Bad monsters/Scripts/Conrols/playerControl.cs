@@ -41,7 +41,7 @@ public class playerControl : MonoBehaviour {
 		
 		Vector2 posHero = new Vector2 (transform.position.x, transform.position.y);
 		
-		//Блокируем движение у двери
+		//Блокируем движение у двери и стен
 		if(canGoToDirection == 1 && h > 0){
 			h = 0;
 		} else if(canGoToDirection == 2 && h < 0){
@@ -84,10 +84,7 @@ public class playerControl : MonoBehaviour {
 	}
 	
 	void OnTriggerStay2D(Collider2D other) {
-		if (other.gameObject.tag == "Door") {
-			isInTransZone = 1;
-			FButton.ShowBut();
-			QButton.ShowBut();
+		if (other.gameObject.tag == "Door" || other.gameObject.tag == "Wall") {
 			//Проверяем находимся слева или справа
 			float dist = other.transform.position.x - transform.position.x;
 			if(dist > 0){
@@ -95,9 +92,15 @@ public class playerControl : MonoBehaviour {
 			} else {
 				canGoToDirection = 2;
 			}
-		} else if (other.gameObject.tag == "Curtains" || other.gameObject.tag == "Bad") {
+			if (other.gameObject.tag == "Door") {
+				isInTransZone = 1;
+				FButton.ShowBut();
+				QButton.ShowBut();
+			}
+		} else if (other.gameObject.tag == "Curtains" || other.gameObject.tag == "Bad" || other.gameObject.tag == "Сupboard") {
 			EButton.ShowBut();
 			if (Input.GetAxis("Action") > 0 && currentState == states.normal) {
+				EButton.HideBut();
 				FButton.ShowBut();
 				currentState = states.hiding;
 				transform.position = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
@@ -126,11 +129,11 @@ public class playerControl : MonoBehaviour {
 	}
 	
 	void OnTriggerExit2D(Collider2D other) {
+		canGoToDirection = 0;
 		if (other.gameObject.tag == "Door") {
 			FButton.HideBut();
 			QButton.HideBut();
 			isInTransZone = 0;
-			canGoToDirection = 0;
 		} else if (other.gameObject.tag == "Curtains" || other.gameObject.tag == "Bad") {
 			EButton.HideBut();
 		}

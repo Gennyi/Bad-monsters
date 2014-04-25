@@ -5,7 +5,7 @@ public class PickObject : MonoBehaviour {
 
 	private bool dispatchOnce = true;
 	private GUIButton EButton;
-	public enum usingObjects {vase};
+	public enum usingObjects {difusBlade, spider, yeast};
 	public usingObjects myObject;
 	
 	void Start() {

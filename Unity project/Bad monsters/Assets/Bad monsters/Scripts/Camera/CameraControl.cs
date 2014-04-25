@@ -5,6 +5,9 @@ public class CameraControl : MonoBehaviour {
 	
 	public Vector3[,] points;
 	const float widhtScreen = 12.8f;
+	const float originSize = 3.58f;
+	const float freeSize = 8f;
+
 	
 	public float doorWidht = 3.5f;
 	public float speed = 2f;
@@ -31,8 +34,10 @@ public class CameraControl : MonoBehaviour {
 		float dist;
 		if (isFree) {
 			dist = Vector3.Distance(playerCtrl.transform.position, transform.position);
+			camera.orthographicSize = Mathf.MoveTowards(camera.orthographicSize, freeSize, Time.deltaTime * 2);
 		} else {
 			dist = Vector3.Distance(points[(int)currentPos.x, (int)currentPos.y], transform.position);
+			camera.orthographicSize = Mathf.MoveTowards(camera.orthographicSize, originSize, Time.deltaTime * 2);
 		}
 
 		float h = Input.GetAxis("LookAtDoor");

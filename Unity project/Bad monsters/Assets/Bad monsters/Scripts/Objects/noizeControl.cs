@@ -15,11 +15,10 @@ public class noizeControl : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			EButton.ShowBut();
 			childControl ourChild = child.GetComponent<childControl>();
-			//Только если спим или боимся
-			if (Input.GetButtonDown("Action") && ourChild.currentState >= childControl.states.sleeping && dispatchOnce) {
+			//Только если спим
+			if (Input.GetButtonDown("Action") && ourChild.currentState == childControl.states.sleeping && dispatchOnce) {
 				dispatchOnce = false;
-				ourChild.scaryLevel += 20;
-				ourChild.pointToMove = transform;
+				ourChild.findWay(transform);
 				ourChild.currentState = childControl.states.moving;
 			}
 		}

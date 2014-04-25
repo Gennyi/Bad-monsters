@@ -5,6 +5,8 @@ public class lightControl : MonoBehaviour {
 
 	public GameObject lamp;
 	private GUIButton EButton;
+	public bool isRequireObject = false;
+	public PickObject.usingObjects objectToUse;
 
 	void Start() {
 		EButton = GameObject.Find("EBut").GetComponent<GUIButton>();
@@ -15,7 +17,13 @@ public class lightControl : MonoBehaviour {
 			EButton.ShowBut();
 			if (Input.GetButtonDown("Action")) {
 				//Переключить свет
-				toggleLight();
+				if(!isRequireObject){
+					toggleLight();
+				}
+				if (isRequireObject && playerControl.inventory.Contains(objectToUse)) {
+					playerControl.inventory.Remove(objectToUse);
+					toggleLight();
+				}
 			}
 		}
 	}

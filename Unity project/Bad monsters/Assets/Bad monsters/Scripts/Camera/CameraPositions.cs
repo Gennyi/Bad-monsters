@@ -15,19 +15,17 @@ public class CameraPositions : MonoBehaviour {
 				points[i, j] = new Vector3(infinity, infinity, -10f);
 			}
 		}
-		
-		points[3,5].x = -9.2f;
-		points[3,5].y = 4.3f;
-		points[4,5].x = -3.2f;
-		points[4,5].y = 4.3f;
-		points[5,5].x = 4.8f;
-		points[5,5].y = 4.3f;
-		points[6,5].x = 17f;
-		points[6,5].y = 4.3f;
-		points[6,4].x = 15.2f;
-		points[6,4].y = -3f;
-		points[5,4].x = 5f;
-		points[5,4].y = -3f;
+
+		points[5,5].x = -0.42f;
+		points[5,5].y = 0f;
+		points[6,5].x = 5.3f;
+		points[6,5].y = 0f;
+		points[7,5].x = 17.45f;
+		points[7,5].y = 0f;
+		points[5,4].x = 0.77f;
+		points[5,4].y = -9.45f;
+		points[6,4].x = 12.73f;
+		points[6,4].y = -9.45f;
 
 		return points;
 	}

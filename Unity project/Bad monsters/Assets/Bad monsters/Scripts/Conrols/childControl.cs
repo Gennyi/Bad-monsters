@@ -16,13 +16,14 @@ public class childControl : MonoBehaviour {
 	private playerControl playerCtrl;
 	public Transform pointToMove;
 	public states currentState = states.sleeping;
-	private float time = 0f;
+	private Timer time;
 	private Transform[] pathMemory;		//Путь до точки
 	private int pointMemory = 0;		//Текущая цель
 	private int WCorFRE = 1;
 	
 	void Awake()
 	{
+		time = gameObject.AddComponent("Timer") as Timer;
 		pathMemory = new Transform[3];
 		playerCtrl = GameObject.Find("Player").GetComponent<playerControl>();
 	}
@@ -32,9 +33,9 @@ public class childControl : MonoBehaviour {
 
 		} else if(currentState == states.sleeping){
 
-			time += Time.deltaTime;
+			time.startTimer();
 			//Если захотели прогуляться
-			if (time > timeOfSleep){
+			if (time.getTime() > timeOfSleep){
 				pointToMove = pointsOfInterests[WCorFRE];
 				// Если сходили в туалет, то идем к холодильнику и наоборот 
 				WCorFRE = WCorFRE%2 + 1;
@@ -42,9 +43,9 @@ public class childControl : MonoBehaviour {
 				currentState = states.moving;
 			}
 		} else if(currentState == states.interacting){
-			time += Time.deltaTime;
+			time.startTimer();
 			//Если простояли достаточное время на точке
-			if (time > timeOfInteracting){
+			if (time.getTime() > timeOfInteracting){
 				findWay(pointsOfInterests[0]);
 				currentState = states.moving;
 			}
@@ -79,22 +80,23 @@ public class childControl : MonoBehaviour {
 					transform.position = pathMemory[++pointMemory].position;
 					pointMemory++;
 				}
-				time = 0f;
+				time.stopTimer();
 			}	
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag == "Player" && playerCtrl.currentState != playerControl.states.hiding && currentState != states.movingToBad) {
+		if (other.gameObject.tag == "Player" && playerCtrl.currentState != playerControl.states.hiding && currentState != states.movingToBad && currentState != states.sleeping) {
 			findWay(pointsOfInterests[0]);
 			currentState = states.movingToBad;
+			scaryLevel = 0;
 		}
 	}
 
-//	void OnGUI () {
-//		string str = "Scary: " + scaryLevel;
-//		GUI.Label (new Rect (10,25,150,100), str);
-//	}
+	void OnGUI () {
+		string str = "Scary: " + scaryLevel;
+		GUI.Label (new Rect (10,25,150,100), str);
+	}
 
 	void Flip ()
 	{

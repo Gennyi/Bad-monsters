@@ -15,13 +15,14 @@ public class parentControl : MonoBehaviour {
 	
 	private playerControl playerCtrl;		// Reference to the PlayerControl script.
 	private Transform pointToMove;
-	private float time = 0f;
+	private Timer time;
 	private float timeOfInteractingReal = 0f;
 	public int pointMemory = 0;
 
 	
 	void Awake()
 	{
+		time = gameObject.AddComponent("Timer") as Timer;
 		playerCtrl = GameObject.Find("Player").GetComponent<playerControl>();
 		timeOfInteractingReal = Random.Range(timeOfInteracting - 2, timeOfInteracting + 2);
 		pathMemory = new Transform[3];
@@ -66,9 +67,9 @@ public class parentControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(currentState == states.interacting){
-			time += Time.deltaTime;
+			time.startTimer();
 			//Если простояли достаточное время на точке
-			if (time > timeOfInteractingReal){
+			if (time.getTime() > timeOfInteractingReal){
 
 				findWay(getPoint());
 				currentState = states.moving;
@@ -83,7 +84,9 @@ public class parentControl : MonoBehaviour {
 			} else {
 				directionLook = -Vector2.right;
 			}
-			RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), directionLook, 15f, 1 << LayerMask.NameToLayer("Default"));
+
+			// 513 = layers Default and Walls;
+			RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), directionLook, 15f, 513);
 			if (hit != null && hit.collider != null) {
 				if(hit.collider.gameObject.tag == "Player") {
 					currentState = states.found;
@@ -105,7 +108,7 @@ public class parentControl : MonoBehaviour {
 				if (pointMemory == 2) {
 					currentState = states.interacting;
 					timeOfInteractingReal = Random.Range(timeOfInteracting - 2, timeOfInteracting + 2);
-					time = 0f;
+					time.stopTimer();
 				} else if (pointMemory == 0){
 					transform.position = pathMemory[++pointMemory].position;
 					pointMemory++;
