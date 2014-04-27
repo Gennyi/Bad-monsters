@@ -7,5 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/Scenes/Level.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Bad monsters/Levels/Test level.unity
+  - enabled: 1
+    path: Assets/Bad monsters/Levels/FirstLevel.unity

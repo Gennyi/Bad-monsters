@@ -8,6 +8,7 @@ public class parentControl : MonoBehaviour {
 	[HideInInspector]
 	public bool facingRight = false;			// Куда наш персонаж смотрит
 	public Transform[] pointsOfInterests;
+	public Transform[] newPointsOfInterests;
 	public Transform[] pathMemory;
 	public float speed = 5f;
 	public float timeOfInteracting = 9f;
@@ -17,6 +18,7 @@ public class parentControl : MonoBehaviour {
 	private Transform pointToMove;
 	private Timer time;
 	private float timeOfInteractingReal = 0f;
+	private Animator anim;					// Анимационный компонент
 	public int pointMemory = 0;
 
 	
@@ -24,9 +26,9 @@ public class parentControl : MonoBehaviour {
 	{
 		time = gameObject.AddComponent("Timer") as Timer;
 		playerCtrl = GameObject.Find("Player").GetComponent<playerControl>();
-		timeOfInteractingReal = Random.Range(timeOfInteracting - 2, timeOfInteracting + 2);
 		pathMemory = new Transform[3];
 		findWay(getPoint());
+		anim = GetComponent<Animator>();
 	}
 	
 	Transform getPoint()
@@ -67,6 +69,9 @@ public class parentControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(currentState == states.interacting){
+
+			anim.SetFloat("Speed", 0f);
+
 			time.startTimer();
 			//Если простояли достаточное время на точке
 			if (time.getTime() > timeOfInteractingReal){
@@ -75,6 +80,10 @@ public class parentControl : MonoBehaviour {
 				currentState = states.moving;
 			}
 		} else if ( currentState == states.moving) {
+
+			anim.SetBool("Sleep", false);
+			anim.SetFloat("Speed", 1f);
+
 			pointToMove = pathMemory[pointMemory];
 
 			//Определяем, нашли ли монстрика
@@ -107,6 +116,16 @@ public class parentControl : MonoBehaviour {
 			if(transform.position == newPos){
 				if (pointMemory == 2) {
 					currentState = states.interacting;
+					//Если подошли к кровати, то устанавливаем анимацию сна
+					Transform bad = GameObject.Find("badDad").GetComponent<Transform>();
+					if (transform.position.x == bad.position.x) {
+						anim.SetBool("Sleep", true);
+					}
+					//Если дошли до паука, то проверяем его наличие
+					PickObject spider = GameObject.Find("spider").GetComponent<PickObject>();
+					if (spider.myObject == PickObject.usingObjects.empty && Mathf.Abs(transform.position.x - pointsOfInterests[1].position.x) < 0.1f) {
+						pointsOfInterests = newPointsOfInterests;
+					}
 					timeOfInteractingReal = Random.Range(timeOfInteracting - 2, timeOfInteracting + 2);
 					time.stopTimer();
 				} else if (pointMemory == 0){
@@ -116,7 +135,6 @@ public class parentControl : MonoBehaviour {
 			}
 		} else if ( currentState == states.found) {
 			Time.timeScale=0;
-
 		}
 	}
 

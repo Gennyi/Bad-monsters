@@ -1,19 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Bad monsters/Scripts/Objects/lightControl.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Bad monsters/Scripts/Conrols/parentControl.cs">
     <Files>
-      <File FileName="Assets/Bad monsters/Scripts/Conrols/childControl.cs" Line="88" Column="43" />
-      <File FileName="Assets/Bad monsters/Scripts/Camera/CameraPositions.cs" Line="21" Column="24" />
+      <File FileName="Assets/Bad monsters/Scripts/Conrols/childControl.cs" Line="68" Column="27" />
+      <File FileName="Assets/Bad monsters/Scripts/Camera/CameraPositions.cs" Line="1" Column="1" />
       <File FileName="Assets/Bad monsters/Scripts/Camera/CameraControl.cs" Line="18" Column="35" />
-      <File FileName="Assets/Bad monsters/Scripts/Objects/lightControl.cs" Line="24" Column="19" />
-      <File FileName="Assets/Bad monsters/Scripts/Objects/noizeControl.cs" Line="15" Column="39" />
-      <File FileName="Assets/Bad monsters/Scripts/Objects/toiletControl.cs" Line="1" Column="1" />
-      <File FileName="Assets/Bad monsters/Scripts/Objects/airShaftControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/Bad monsters/Scripts/Objects/lightControl.cs" Line="38" Column="22" />
       <File FileName="Assets/Bad monsters/Scripts/Other/GUIButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Bad monsters/Scripts/Objects/PickObject.cs" Line="1" Column="1" />
-      <File FileName="Assets/Bad monsters/Scripts/Conrols/parentControl.cs" Line="93" Column="6" />
+      <File FileName="Assets/Bad monsters/Scripts/Conrols/parentControl.cs" Line="135" Column="5" />
       <File FileName="Assets/Bad monsters/Scripts/Other/Timer.cs" Line="4" Column="19" />
-      <File FileName="Assets/Bad monsters/Scripts/Conrols/playerControl.cs" Line="106" Column="35" />
+      <File FileName="Assets/Bad monsters/Scripts/Conrols/playerControl.cs" Line="141" Column="22" />
+      <File FileName="Assets/Bad monsters/Scripts/Objects/objectToFilth.cs" Line="13" Column="63" />
+      <File FileName="Assets/Bad monsters/Scripts/Objects/PickObject.cs" Line="20" Column="42" />
+      <File FileName="Assets/Bad monsters/Scripts/Objects/noizeControl.cs" Line="22" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

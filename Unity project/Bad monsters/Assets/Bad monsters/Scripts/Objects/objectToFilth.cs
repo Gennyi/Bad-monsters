@@ -15,7 +15,6 @@ public class objectToFilth : MonoBehaviour {
 
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.gameObject.tag == "Player" && playerControl.inventory.Contains(objectToUse)) {
-			Debug.Log("ebut");
 			EButton.ShowBut();
 			if (Input.GetButtonDown("Action")){
 				playerControl.inventory.Remove(objectToUse);

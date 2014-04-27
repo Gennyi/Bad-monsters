@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: 9e6c649eb41864cef89257ab3c6ed32d
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 1024
+    textureFormat: -2
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: malchikgovnop_0
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 364
+        width: 70
+        height: 86
+      alignment: 9
+      pivot: {x: .444282323, y: .137188584}
+    - name: malchikgovnop_1
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 344
+        width: 33
+        height: 50
+      alignment: 9
+      pivot: {x: .486867279, y: .742680669}
+    - name: malchikgovnop_2
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 339
+        width: 33
+        height: 52
+      alignment: 9
+      pivot: {x: .473734528, y: .741680443}
+    - name: malchikgovnop_3
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 340
+        width: 46
+        height: 61
+      alignment: 9
+      pivot: {x: .408901036, y: .860662222}
+    - name: malchikgovnop_4
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 343
+        width: 47
+        height: 57
+      alignment: 9
+      pivot: {x: .36626029, y: .812453449}
+    - name: malchikgovnop_5
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 253
+        width: 60
+        height: 96
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: malchikgovnop_6
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 284
+        width: 25
+        height: 41
+      alignment: 9
+      pivot: {x: .465330809, y: .785382509}
+    - name: malchikgovnop_7
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 279
+        width: 26
+        height: 42
+      alignment: 9
+      pivot: {x: .483332694, y: .716679156}
+    - name: malchikgovnop_8
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 254
+        width: 45
+        height: 66
+      alignment: 9
+      pivot: {x: .445678711, y: .870377064}
+    - name: malchikgovnop_9
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 260
+        width: 48
+        height: 61
+      alignment: 9
+      pivot: {x: .383595794, y: .877836645}
+    - name: malchikgovnop_10
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 241
+        width: 26
+        height: 29
+      alignment: 9
+      pivot: {x: .487875134, y: .848388672}
+    - name: malchikgovnop_11
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 235
+        width: 25
+        height: 31
+      alignment: 9
+      pivot: {x: .433530271, y: .861833155}
+    - name: malchikgovnop_12
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 224
+        width: 44
+        height: 21
+      alignment: 9
+      pivot: {x: .34126699, y: .682921648}
+    - name: malchikgovnop_13
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 235
+        width: 47
+        height: 21
+      alignment: 9
+      pivot: {x: .403408617, y: .682921648}
+  spritePackingTag: 
+  userData: 

@@ -13,13 +13,20 @@ public class noizeControl : MonoBehaviour {
 
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
-			EButton.ShowBut();
 			childControl ourChild = child.GetComponent<childControl>();
 			//Только если спим
-			if (Input.GetButtonDown("Action") && ourChild.currentState == childControl.states.sleeping && dispatchOnce) {
-				dispatchOnce = false;
-				ourChild.findWay(transform);
-				ourChild.currentState = childControl.states.moving;
+			if (ourChild.currentState == childControl.states.sleeping && dispatchOnce) {
+				EButton.ShowBut();
+					if (Input.GetButtonDown("Action")) {
+					dispatchOnce = false;
+					ourChild.scaryLevel++;
+					Animation anim = GetComponent<Animation>();
+					anim.Play();
+					ourChild.findWay(transform);
+					ourChild.currentState = childControl.states.moving;
+				}
+			} else {
+				EButton.HideBut();
 			}
 		}
 	}

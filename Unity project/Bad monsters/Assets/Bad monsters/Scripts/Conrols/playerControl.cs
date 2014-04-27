@@ -98,13 +98,16 @@ public class playerControl : MonoBehaviour {
 				QButton.ShowBut();
 			}
 		} else if (other.gameObject.tag == "Curtains" || other.gameObject.tag == "Bad" || other.gameObject.tag == "Сupboard") {
-			EButton.ShowBut();
-			if (Input.GetAxis("Action") > 0 && currentState == states.normal) {
+			if (currentState == states.normal) {
+				EButton.ShowBut();
+				if (Input.GetAxis("Action") > 0) {
+					FButton.ShowBut();
+					currentState = states.hiding;
+					transform.position = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
+					transform.localScale = new Vector3(transform.localScale.x * 0.5f, transform.localScale.y * 0.5f, transform.localScale.z);
+				}
+			} else {
 				EButton.HideBut();
-				FButton.ShowBut();
-				currentState = states.hiding;
-				transform.position = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
-				transform.localScale = new Vector3(transform.localScale.x * 0.5f, transform.localScale.y * 0.5f, transform.localScale.z);
 			}
 		} else if (other.gameObject.tag == "Light") {
 			Time.timeScale = 0;
@@ -112,7 +115,7 @@ public class playerControl : MonoBehaviour {
 		if (other.gameObject.tag == "Child") {
 			childControl ourChild = other.gameObject.GetComponent<childControl>();
 			if(currentState == states.hiding && Input.GetButtonDown("goOut") && 
-			   ourChild.currentState == childControl.states.scaring && ourChild.dispatchOnce){
+			   ourChild.currentState == childControl.states.sleeping && ourChild.dispatchOnce){
 				score += (int)ourChild.scaryLevel;
 				ourChild.dispatchOnce = false;
 				ourChild.scaryLevel = 0;
@@ -134,7 +137,7 @@ public class playerControl : MonoBehaviour {
 			FButton.HideBut();
 			QButton.HideBut();
 			isInTransZone = 0;
-		} else if (other.gameObject.tag == "Curtains" || other.gameObject.tag == "Bad") {
+		} else if (other.gameObject.tag == "Curtains" || other.gameObject.tag == "Bad" || other.gameObject.tag == "Сupboard") {
 			EButton.HideBut();
 		}
 	}

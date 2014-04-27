@@ -3,7 +3,7 @@ using System.Collections;
 
 public class childControl : MonoBehaviour {
 
-	public enum states {moving, movingToBad, interacting, sleeping, scaring};
+	public enum states {moving, movingToBad, interacting, sleeping};
 
 	[HideInInspector]
 	private bool facingRight = false;			// Куда наш персонаж смотрит
@@ -20,18 +20,18 @@ public class childControl : MonoBehaviour {
 	private Transform[] pathMemory;		//Путь до точки
 	private int pointMemory = 0;		//Текущая цель
 	private int WCorFRE = 1;
+	private Animator anim;					// Анимационный компонент
 	
 	void Awake()
 	{
 		time = gameObject.AddComponent("Timer") as Timer;
 		pathMemory = new Transform[3];
 		playerCtrl = GameObject.Find("Player").GetComponent<playerControl>();
+		anim = GetComponent<Animator>();
 	}
 
 	void Update () {
-		if(currentState == states.scaring){
-
-		} else if(currentState == states.sleeping){
+		if(currentState == states.sleeping){
 
 			time.startTimer();
 			//Если захотели прогуляться
@@ -44,6 +44,7 @@ public class childControl : MonoBehaviour {
 			}
 		} else if(currentState == states.interacting){
 			time.startTimer();
+			anim.SetFloat("Speed", 0f);
 			//Если простояли достаточное время на точке
 			if (time.getTime() > timeOfInteracting){
 				findWay(pointsOfInterests[0]);
@@ -54,6 +55,9 @@ public class childControl : MonoBehaviour {
 
 			Vector3 newPos = new Vector3(pointToMove.position.x, transform.position.y, transform.position.z);
 			transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime * speed);
+
+			anim.SetBool("Sleep", false);
+			anim.SetFloat("Speed", 1f);
 	
 			//поворачиваем ребенка
 			float direction = newPos.x - transform.position.x;
@@ -67,6 +71,11 @@ public class childControl : MonoBehaviour {
 				//если это объект
 				if (pointMemory == 2){
 					if (currentState == states.moving) {
+						Transform bad = GameObject.Find("badBoy").GetComponent<Transform>();
+						if (transform.position.x == bad.position.x) {
+							anim.SetFloat("Speed", 0f);
+							anim.SetBool("Sleep", true);
+						}
 						currentState = newPos.x == pointsOfInterests[0].position.x ? states.sleeping : states.interacting;
 					} else {
 						//если мы напуганные добежали до кровати

@@ -5,7 +5,7 @@ public class PickObject : MonoBehaviour {
 
 	private bool dispatchOnce = true;
 	private GUIButton EButton;
-	public enum usingObjects {difusBlade, spider, yeast};
+	public enum usingObjects {difusBlade, spider, yeast, empty};
 	public usingObjects myObject;
 	
 	void Start() {
@@ -13,14 +13,14 @@ public class PickObject : MonoBehaviour {
 	}
 	
 	void OnTriggerStay2D(Collider2D other) {
-		if (other.gameObject.tag == "Player") {
+		if (other.gameObject.tag == "Player" && dispatchOnce) {
 			EButton.ShowBut();
-			if (Input.GetButtonDown("Action") && dispatchOnce) {
+			if (Input.GetButtonDown("Action")) {
 				dispatchOnce = false;
 				transform.localScale = new Vector3();
-//				gameObject.GetComponent<playerControl>().inventory.Add(usingObjects);
 				playerControl.inventory.Add(myObject);
-
+				myObject = usingObjects.empty;
+				EButton.HideBut();
 			}
 		}
 	}

@@ -14,16 +14,21 @@ public class lightControl : MonoBehaviour {
 
 	void OnTriggerStay2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
-			EButton.ShowBut();
-			if (Input.GetButtonDown("Action")) {
 				//Переключить свет
-				if(!isRequireObject){
+			if(!isRequireObject){
+				EButton.ShowBut();
+				if (Input.GetButtonDown("Action")) {
 					toggleLight();
 				}
-				if (isRequireObject && playerControl.inventory.Contains(objectToUse)) {
+			}
+			if (isRequireObject && playerControl.inventory.Contains(objectToUse)) {
+				EButton.ShowBut();
+				if (Input.GetButtonDown("Action")) {
 					playerControl.inventory.Remove(objectToUse);
 					toggleLight();
 				}
+			} else {
+				EButton.HideBut();
 			}
 		}
 	}
